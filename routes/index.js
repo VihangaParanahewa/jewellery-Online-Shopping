@@ -30,7 +30,7 @@ router.get('/register', function(req, res, next) {
 });
 
 router.post('/submit', function(req, res, next) {
-   req.check('email','Invalid Password').isEmail();
+   req.check('email','Invalid Email').isEmail();
    req.check('password','Password Not Match').equals(req.body.confirmPassword);
    req.check('password','At least should be 4 characters').isLength({min: 4});
    req.check('mobile','Mobile Number Length Invalid').isLength({min: 10, max: 15});
@@ -49,7 +49,8 @@ router.post('/submit', function(req, res, next) {
          email : req.body.email,
          password : sha1(req.body.password),
          mobile : req.body.mobile,
-         role : req.body.role
+         role : req.body.role,
+         profileImage : "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
 
      };
 
@@ -106,7 +107,6 @@ router.get('/logout', function(req, res, next) {
     req.session.destroy();
     res.redirect('/');
 });
-
 
 passport.serializeUser(function(user_detail, done) {
     done(null, user_detail);

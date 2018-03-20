@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/images/NJ.jpg">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+    <style>
+        .navbar-inverse{
+            opacity: .8;
+        }
+    </style>
+
+    <title>Novel Jewellers</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="/assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="/stylesheets/carousel.css" rel="stylesheet">
+</head>
+<!-- NAVBAR
+================================================== -->
+<body>
+
+<div class="navbar-wrapper">
+    <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">NOVEL JEWELLERS</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/">Home</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Online Shopping<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Ring</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Necklace</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Earring</a></li>
+                                <li role="separator" class="divider"></li>
+                            </ul>
+                        </li>
+                        {{#if isAuthenticated}}
+                            {{#if userRole}}
+                                <li><a href="#">Publish</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operations<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">Add User</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">View Online Users</a></li>
+                                        <li role="separator" class="divider"></li>
+                                        <li><a href="#">View System Users</a></li>
+                                        <li role="separator" class="divider"></li>
+                                    </ul>
+                                </li>
+                            {{/if}}
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="/users/viewProfile">View Profile</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="/users/editProfile">Edit Profile</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="/users/updatepassword">Rest Password</a></li>
+                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </li>
+
+                            <li><a href="/logout">Log out</a></li>
+
+                        {{else}}
+                            <li><a data-toggle="modal" data-target="#myModal" href="#">Sign In</a></li>
+                            <li><a data-toggle="modal" data-target="#myModal2"  href="#">Register</a></li>
+                        {{/if}}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+</div>
+
+                <!-- Modal content-->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sign In</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/signIn" method="post">
+                    <div class="row">
+                        <div class="form-group col-xs-6">
+                            <label for="exampleInputEmailAddress1">Email Address</label>
+                            <input type="text" class="form-control" id="email" placeholder="Email Address" name="email">
+                            <label for="exampleInputPassword">Password</label>
+                            <input type="password" class="form-control" id="email" placeholder="Password" name="password">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-danger" name="submit" value="Confirm">Log In</button>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="myModal2" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Register</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/submit" method="post">
+                    <div class="row">
+                        <div class="form-group col-xs-6">
+
+                            <label for="exampleInputFirstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName">
+                            <label for="exampleInputLastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="lastName">
+                            <label for="exampleInputEmailAddress1">Email Address</label>
+                            <input type="text" class="form-control" id="email" placeholder="Email Address" name="email">
+                            <label for="exampleInputPassword">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                            <label for="exampleInputPassword">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword">
+                            <input type="hidden" class="form-control" id="role" name="role" value="Customer">
+                            <label for="examplePhoneNumber">Mobile</label>
+                            <input type="number" class="form-control" id="mobile" placeholder="07x xxxx xxx" name="mobile">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success" name="submit" value="Confirm">Register Now</button>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br><br><br><br><br>
+
+{{{body}}}
+</body>
+</html>

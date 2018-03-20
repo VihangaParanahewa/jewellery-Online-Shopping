@@ -1,0 +1,122 @@
+<link href="/stylesheets/profile.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+    <div class="row">
+
+
+        <div class="col-md-7 ">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">  <h4 >User Profile</h4></div>
+                <div class="panel-body">
+
+                    <div class="box box-info">
+
+                        <div class="box-body">
+                            <div class="col-sm-6">
+                                <div  align="center"> <img alt="User Pic" src="{{ user.profileImage}}" id="profile-image1" class="img-circle img-responsive">
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                                <br>
+
+                                <!-- /input-group -->
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 style="color:#00b1b1;">{{user.firstName}} {{user.lastName}}</h4></span>
+                                <span><p>{{user.role}}</p></span>
+                            </div>
+                            <div class="clearfix"></div>
+                            <hr style="margin:5px 0 5px 0;">
+
+
+                            <div class="col-sm-5 col-xs-6 tital " >First Name:</div><div class="col-sm-7 col-xs-6 ">{{user.firstName}}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 col-xs-6 tital " >Last Name:</div><div class="col-sm-7">{{user.lastName}}</div>
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 col-xs-6 tital " >Email Address:</div><div class="col-sm-7">{{user.email}}</div>
+
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 col-xs-6 tital " >Mobile Number:</div><div class="col-sm-7">{{user.mobile}}</div>
+
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+                            <div class="col-sm-5 col-xs-6 tital " >Role:</div><div class="col-sm-7">{{user.role}}</div>
+
+                            <div class="clearfix"></div>
+                            <div class="bot-border"></div>
+
+
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <script>
+            $(function() {
+                $('#profile-image1').on('click', function() {
+                    $('#profile-image-upload').click();
+                });
+            });
+        </script>
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+<footer>
+    <p class="pull-right">
+        <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
+        <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
+        <a href="#"><i class="fab fa-linkedin fa-2x"></i></a>
+        <a href="#"><i class="fab fa-google-plus fa-2x"></i></a>
+        <a href="#"><i class="fas fa-map-marker-alt fa-2x"></i></a> &middot;
+        <a href="#">Back to top</a>
+    </p>
+    <p>&copy; 2018 Novel Jewellers, All Right Reserved. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+</footer>
+
+<!-- /.container -->
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="/assets/js/vendor/holder.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
