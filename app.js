@@ -8,6 +8,7 @@ var hbs  = require('express-handlebars');
 var expressValidator = require('express-validator');
 var expressSession= require('express-session');
 var passport= require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 var MongoStore = require('connect-mongo')(expressSession);
 var mongoose = require('mongoose');
 
@@ -68,6 +69,16 @@ app.use(expressSession({
 //app.use(expressSession({secret:'max' ,saveUninitialized: false ,resave: false}));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function (req,res,next) {
+    res.locals.isAuthenticated = req.isAuthenticated();
+    if (req.isAuthenticated()){
+        res.locals.user = req.user;
+        if(req.user.role == 'Admin')
+        res.locals.userRole= true;
+    }
+    next();
+});
 
 app.use('/', index);
 app.use('/users', users);

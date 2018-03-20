@@ -58,8 +58,6 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/">Home</a>
-                            <li><a data-toggle="modal" data-target="#myModal" href="#">Sign In</a></li>
-                            <li><a data-toggle="modal" data-target="#myModal2"  href="#">Register</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Online Shopping<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -72,6 +70,42 @@
                                 <li role="separator" class="divider"></li>
                             </ul>
                         </li>
+                        {{#if isAuthenticated}}
+                            {{#if userRole}}
+                            <li><a href="#">Publish</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operations<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Add User</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">View Online Users</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">View System Users</a></li>
+                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </li>
+                            {{/if}}
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">View Profile</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Edit Profile</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#">Rest Password</a></li>
+                                    <li role="separator" class="divider"></li>
+                                </ul>
+                            </li>
+
+                            <li><a href="/logout">Log out</a></li>
+
+                        {{else}}
+                            <li><a data-toggle="modal" data-target="#myModal" href="#">Sign In</a></li>
+                            <li><a data-toggle="modal" data-target="#myModal2"  href="#">Register</a></li>
+                        {{/if}}
                     </ul>
                 </div>
             </div>

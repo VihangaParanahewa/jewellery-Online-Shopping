@@ -14,31 +14,19 @@ var url = 'mongodb://localhost:27017';
 
 const dbName= 'jewellery';
 /* GET home page. */
-router.get('/', authenticationMiddleware(), function(req, res, next) {
+router.get('/', function(req, res, next) {
     console.log(req.user);
     console.log(req.isAuthenticated());
-    if(req.user.role == 'Admin'){
-        res.render('index', { layout: 'admin' });
-    }else{
-        res.render('index', {layout: 'customer'});
-    }
+        res.render('index');
+
 
 });
 
-router.get('/home', function(req, res, next) {
-    if(req.isAuthenticated()){
-        res.redirect('/');
-    }
-    res.render('index');
-});
+
 
 router.get('/register', function(req, res, next) {
-    if(req.isAuthenticated()) {
-        res.redirect('/');
-    }else
-        {
-            res.render('register', {success: req.session.success, errors: req.session.errors});
-        }
+    res.render('register', {success: req.session.success, errors: req.session.errors});
+
 });
 
 router.post('/submit', function(req, res, next) {
@@ -100,7 +88,7 @@ router.post('/signIn', function(req, res, next) {
                 req.login(user_detail, function (err) {
                     res.redirect('/');
                 });
-            }else {
+            }else{
                 console.log("User Invalid");
                 res.render('login' , {error: true});
         }
@@ -131,12 +119,11 @@ passport.deserializeUser(function(user_detail, done) {
 
 function authenticationMiddleware () {
     return (req, res, next) => {
-        console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+        //console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
 
         if (req.isAuthenticated()) return next();
-        res.redirect('/home');
+        res.redirect('/');
     }
 }
-
 
 module.exports = router;
