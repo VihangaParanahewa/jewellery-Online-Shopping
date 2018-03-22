@@ -1,7 +1,19 @@
 var express = require('express');
 var router = express.Router();
-var multer = require('multer');
-var upload = multer({ dest : 'uploads/'});
+
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination : function(req,file,cb){
+        cb(null,'public/images/');
+    },
+    filename : function (req,file,cb) {
+        cb(null,file.fieldname + '-' + Date.now() + '.jpg');
+    }
+});
+
+
+const upload = multer({storage : storage});
 
 var expressValidator = require('express-validator');
 var passport= require('passport');
@@ -36,8 +48,9 @@ router.get('/editProfile', function(req, res, next) {
 });
 
 
-router.post('/upgradeProfile', function(req, res, next) {
-    console.log(req.body.profileImage);
+router.post('/upgradeProfile', upload.single('profileImage'), function(req, res, next) {
+    console.log(req.file);
+    console.log(req.body);
     req.check('email', 'Invalid Email').isEmail();
     req.check('mobile', 'Mobile Number Length Invalid').isLength({min: 10, max: 15});
 
@@ -56,7 +69,8 @@ router.post('/upgradeProfile', function(req, res, next) {
                     firstName : req.body.firstName,
                     lastName: req.body.lastName,
                     email: req.body.email,
-                    mobile: req.body.mobile
+                    mobile: req.body.mobile,
+                    profileImage: '/images/'+ req.file.filename
 
                 } }, function(err, rest) {
                     assert.equal(null, err);
