@@ -14,6 +14,9 @@ var mongoose = require('mongoose');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var post = require('./routes/post');
+var operations = require('./routes/operations');
+var products = require('./routes/products');
 
 var app = express();
 
@@ -34,20 +37,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')))
-
-/*app.use(express.session({
-    secret: 'a4f8071f-c873-4447-8ee2',
-    cookie: { maxAge: 2628000000 },
-    store: new (expressSession)({
-        storage: 'mongodb',
-        instance: mongoose, // optional
-        host: 'localhost', // optional
-        port: 27017, // optional
-        db: 'jewellery', // optional
-        collection: 'session', // optional
-        expire: 86400 // optional
-    })
-}));*/
 
 app.use(expressSession({
     secret: 'foo',
@@ -82,6 +71,9 @@ app.use(function (req,res,next) {
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/post', post);
+app.use('/operations', operations);
+app.use('/products', products);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

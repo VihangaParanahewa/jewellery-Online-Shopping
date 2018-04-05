@@ -9,9 +9,13 @@ const storage = multer.diskStorage({
     },
     filename : function (req,file,cb) {
         cb(null,file.fieldname + '-' + Date.now() + '.jpg');
+    attachFile = true;
     }
+
 });
 
+attachFile = false;
+updateAllDetail = false;
 
 const upload = multer({storage : storage});
 
@@ -38,19 +42,29 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/viewProfile', function(req, res, next) {
-    res.render('viewProfile', {layout: 'user'});
+    if(req.isUnauthenticated()){
+        res.redirect('/')
+    }else {
+        res.render('viewProfile', {layout: 'user'});
+    }
+
 
 });
 
 router.get('/editProfile', function(req, res, next) {
-    res.render('editProfile', {layout: 'user'});
+    if(req.isUnauthenticated()){
+        res.redirect('/')
+    }else {
+        res.render('editProfile', {layout: 'user'});
+    }
 
 });
 
 
 router.post('/upgradeProfile', upload.single('profileImage'), function(req, res, next) {
-    console.log(req.file);
-    console.log(req.body);
+    if(attachFile) fileAuthentication (req);
+    req.checkBody('firstName','First Name field Empty').notEmpty();
+    req.checkBody('lastName','Last Name field Empty').notEmpty();
     req.check('email', 'Invalid Email').isEmail();
     req.check('mobile', 'Mobile Number Length Invalid').isLength({min: 10, max: 15});
 
@@ -60,49 +74,100 @@ router.post('/upgradeProfile', upload.single('profileImage'), function(req, res,
         req.session.errors = errors;
         res.render('editProfile', {errors : req.session.errors});
     } else {
-        mongo.connect(url, function(err, client) {
-            assert.equal(null, err);
-            var dbo = client.db(dbName);
-            dbo.collection("user").updateMany(
-                {  email: req.user.email},
-                { $set: {
-                    firstName : req.body.firstName,
-                    lastName: req.body.lastName,
-                    email: req.body.email,
-                    mobile: req.body.mobile,
-                    profileImage: '/images/'+ req.file.filename
+        updateDetail = {
+            $set: {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                mobile: req.body.mobile,
+            }
+        };
+        req.session.errors = false;
+        if(req.user.email == req.body.email){
+            newEmail = req.user.email;
+            res.redirect('/users/updateUser');
+        }else{
+            newEmail = req.body.email;
+            mongo.connect(url, function (err, client) {
+                assert.equal(null, err);
+                const db = client.db(dbName);
+                db.collection('user').find({email: req.body.email}, {email: 1})
+                    .toArray(function (err, result) {
+                        assert.equal(null, err);
+                        if (result.length > 0) {
+                            console.log("Check unique Email");
+                            res.render('editProfile', {errors : req.session.errors, existNewEmail : true});
+                        } else {
+                            res.redirect('/users/updateUser');
+                        }
+                        client.close();
+                    });
+            });
+        }
 
-                } }, function(err, rest) {
-                    assert.equal(null, err);
-                    console.log(rest.result.nModified + " document(s) updated");
-                    client.close();
-                });
-        });
 
-        res.redirect('/users/updateSession');
+
 
     }
 });
 
 
+router.get('/updateUser', function (req, res, next) {
+
+    mongo.connect(url, function(err, client) {
+        assert.equal(null, err);
+        var dbo = client.db(dbName);
+        if(updateAllDetail){
+            dbo.collection("user").updateMany(
+                {  email: req.user.email},updateAllDetail
+                , function(err, rest) {
+                    assert.equal(null, err);
+                    console.log(rest.result.nModified + " document(s) updated");
+                    client.close();
+                    updateAllDetail = false;
+                    res.redirect('/users/updateSession');
+                });
+        } else if (updateDetail){
+            dbo.collection("user").updateMany(
+                {  email: req.user.email},updateDetail
+                , function(err, rest) {
+                    assert.equal(null, err);
+                    console.log(rest.result.nModified + " document(s) updated");
+                    client.close();
+                    res.redirect('/users/updateSession');
+                });
+        }
+
+    });
+
+
+
+});
+
+
 router.get('/updatePassword', function (req, res, next) {
-    res.render('updatePassword', {layout: 'user'});
+    if(req.isUnauthenticated()){
+        res.redirect('/')
+    }else {
+        res.render('updatePassword', {layout: 'user'});
+    }
+
 });
 
 
 router.get('/updateSession', function (req, res, next) {
-    var userEmail = req.user.email;
+    console.log(newEmail);
     mongo.connect(url, function (err,client) {
         assert.equal(null, err);
         const db = client.db(dbName);
         db.collection('user').find(
-            {email: userEmail}
+            {email: newEmail}
         ).toArray(function (err, result) {
             assert.equal(null, err);
-                const user_detail = result[0];
-                console.log(user_detail);
+                const user__Detail = result[0];
+                console.log(user__Detail);
                 console.log("User Entered details Correct");
-                req.login(user_detail, function (err) {
+                req.login(user__Detail, function (err) {
                     res.redirect('/users/viewProfile');
                 });
             client.close();
@@ -152,5 +217,21 @@ passport.serializeUser(function(user_detail, done) {
 passport.deserializeUser(function(user_detail, done) {
     done(null, user_detail);
 });
+
+
+function fileAuthentication (req) {
+        updateAllDetail = {
+            $set: {
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                mobile: req.body.mobile,
+                profileImage: '/images/' + req.file.filename
+            }
+        };
+        attachFile = false;
+
+}
+
 
 module.exports = router;

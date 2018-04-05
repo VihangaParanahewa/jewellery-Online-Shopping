@@ -4,14 +4,24 @@
 <!------ Include the above in your HEAD tag ---------->
 
 {{# if errors}}
-    <section class="label-danger">
+    <div class="alert alert-danger">
         <ul>
             {{# each errors }}
                 <li><h2>{{this.msg}}</h2></li>
             {{/each}}
         </ul>
+</div>
+    {{else}}
+    {{# if existNewEmail}}
+
+    <div class="alert alert-danger">
+        <ul>
+                <li><h2>New Email You Entered is Already Exist from another User</h2></li>
+        </ul>
+    </div>
+    {{/if}}
+
 {{/if}}
-</section>
 
 <div class="container">
     <div class="row">
@@ -29,7 +39,7 @@
                             <div class="col-sm-6">
                                 <div  align="center"> <img alt="User Pic" src="{{ user.profileImage}}" id="profile-image1" class="img-circle img-responsive">
 
-                                    <input id="profile-image-upload" class="hidden" type="file" name="profileImage">
+                                    <input id="profile-image-upload" class="hidden" type="file" name="profileImage" value="kjkjk">
                                     <div style="color:#999;" >click here to change profile image</div>
                                     <!--Upload Image Js And Css-->
 
@@ -86,7 +96,9 @@
                             <div class="bot-border"></div>
 
                             <div class="col-sm-5 col-xs-6 tital " >
-                                <button type="submit" class="btn btn-info active" name="submit" value="Update">Upgrade Profile</button>
+                                <button type="submit" class="btn btn-info active" name="submit" value="Update"
+                                        onclick="return confirm('Are You Sure ' +
+                         'You Want To Upgrade Your Profile..!');">Upgrade Profile</button>
                             </div><div class="col-sm-7"><a href="/users/editProfile" class="btn btn-default active">Cancel</a></div>
 
                             <div class="clearfix"></div>
@@ -115,40 +127,6 @@
                 });
             });
         </script>
-
-
-
-
-
-
-
-
-
     </div>
 </div>
 
-<footer>
-    <p class="pull-right">
-        <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
-        <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
-        <a href="#"><i class="fab fa-linkedin fa-2x"></i></a>
-        <a href="#"><i class="fab fa-google-plus fa-2x"></i></a>
-        <a href="#"><i class="fas fa-map-marker-alt fa-2x"></i></a> &middot;
-        <a href="#">Back to top</a>
-    </p>
-    <p>&copy; 2018 Novel Jewellers, All Right Reserved. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-</footer>
-
-<!-- /.container -->
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="/javascripts/bootstrap.min.js"></script>
-<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-<script src="/assets/js/vendor/holder.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>

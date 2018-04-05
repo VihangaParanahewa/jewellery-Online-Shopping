@@ -1,17 +1,22 @@
 {{# if success }}
-    <section class="label-success">
+    <div class="alert alert-success">
         <h2>Successful Registration!</h2>
-    </section>
+    </div>
     {{ else }}
     {{# if errors}}
-        <section class="label-danger">
+        <div class="alert alert-danger">
             <ul>
                 {{# each errors }}
-                    <li>{{this.msg}}</li>
+                    <li><h3>{{this.msg}}</h3></li>
                 {{/each}}
             </ul>
-            {{/if}}
-        </section>
+    {{ else }}
+            <div class="alert alert-danger">
+                <ul>
+                        <li><h3>Email Already Exist</h3></li>
+                </ul>
+        </div>
+        {{/if}}
     <hr>
     <div class="container">
         <form action="/submit" method="post">
@@ -19,17 +24,17 @@
                 <div class="form-group col-xs-6">
 
                     <label for="exampleInputFirstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName">
+                    <input type="text" class="form-control" value="{{userDetail.firstName}}" id="firstName" placeholder="First Name" name="firstName">
                     <label for="exampleInputLastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="lastName">
+                    <input type="text" class="form-control" value="{{userDetail.lastName}}" id="lastName" placeholder="Last Name" name="lastName">
                     <label for="exampleInputEmailAddress1">Email Address</label>
-                    <input type="text" class="form-control" id="email" placeholder="Email Address" name="email">
+                    <input type="text" class="form-control" value="{{userDetail.email}}" id="email" placeholder="Email Address" name="email">
                     <label for="exampleInputPassword">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Password" name="password">
                     <label for="exampleInputPassword">Confirm Password</label>
                     <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword">
                     <label for="examplePhoneNumber">Mobile</label>
-                    <input type="number" class="form-control" id="mobile" placeholder="07x xxxx xxx" name="mobile">
+                    <input type="number" class="form-control" value="{{userDetail.mobile}}" id="mobile" placeholder="07x xxxx xxx" name="mobile">
                     <input type="hidden" class="form-control" id="role" name="role" value="Customer">
                 </div>
             </div>
@@ -40,33 +45,5 @@
 
     </div>
     {{/if}}
-<hr>
-
-
-
-<footer>
-    <p class="pull-right">
-        <a href="#"><i class="fab fa-facebook fa-2x"></i></a>
-        <a href="#"><i class="fab fa-twitter fa-2x"></i></a>
-        <a href="#"><i class="fab fa-linkedin fa-2x"></i></a>
-        <a href="#"><i class="fab fa-google-plus fa-2x"></i></a>
-        <a href="#"><i class="fas fa-map-marker-alt fa-2x"></i></a> &middot;
-        <a href="#">Back to top</a>
-    </p>
-    <p>&copy; 2018 Novel Jewellers, All Right Reserved. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-</footer>
 
 </div><!-- /.container -->
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="/javascripts/bootstrap.min.js"></script>
-<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-<script src="/assets/js/vendor/holder.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
-
