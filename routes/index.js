@@ -29,8 +29,7 @@ router.get('/register', function(req, res, next) {
     if(req.isAuthenticated()){
      res.redirect('/');
     }else {
-        res.render('register', {success: req.session.success, errors: req.session.errors,
-            userDetail: userDetail});
+        res.render('register', {success: req.session.success, errors: req.session.errors, existEmail: false});
     }
 
 
@@ -79,8 +78,8 @@ router.post('/submit', function(req, res, next) {
                    .toArray(function (err, result) {
                        assert.equal(null, err);
                        if (result.length > 0) {
-                           console.log("Check unique Email");
-                           res.redirect('/register')
+                           console.log("verify Not unique Email");
+                           res.render('register', {success: req.session.success, errors: req.session.errors, existEmail: true});
                        } else {
                            res.redirect('/insertUser');
                        }

@@ -82,7 +82,7 @@ router.get('/continue', function(req, res, next) {
         var dbo = client.db(dbName);
         dbo.collection("products").insertOne(
             {
-                _id : productId,
+                productId : productId,
                 name: name,
                 category : category,
                 quantity : quantity,
