@@ -1,1 +1,2 @@
-# jewellery-OnlineShopping
+# jewellery-OnlineShopping.....
+Node.js + Express.js + Passport.js+ MongoDB
