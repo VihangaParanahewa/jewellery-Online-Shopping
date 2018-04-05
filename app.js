@@ -17,6 +17,7 @@ var users = require('./routes/users');
 var post = require('./routes/post');
 var operations = require('./routes/operations');
 var products = require('./routes/products');
+var editProduct = require('./routes/editProduct');
 
 var app = express();
 
@@ -74,6 +75,7 @@ app.use('/users', users);
 app.use('/post', post);
 app.use('/operations', operations);
 app.use('/products', products);
+app.use('/editProduct', editProduct);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -18,33 +18,51 @@
                 </ul>
         </div>
     {{/if}}
-    <hr>
-    <div class="container">
-        <form action="/submit" method="post">
-            <div class="row">
-                <div class="form-group col-xs-6">
+        <section class="banner-sec">
+            <div class="container">
+                <div class="row">
+                    <div class="container">
+                        <h1>Registration</h1>
+                        <hr>
+                        <form action="/submit" method="post">
+                            <div class="form-group col-lg-4">
+                                <label for="exampleInputFirstName">First Name</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="exampleInputLastName">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Last Name" name="lastName">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="exampleInputEmailAddress1">Email Address</label>
+                                <input type="text" class="form-control" id="email" placeholder="Email Address" name="email">
+                            </div>
+                            <div class="form-group col-lg-4" >
+                                <label for="exampleInputPassword">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="exampleInputPassword">Confirm Password</label>
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="examplePhoneNumber">Mobile</label>
+                                <input type="number" class="form-control" id="mobile" placeholder="07x xxxx xxx" name="mobile">
+                            </div>
+                            <input type="hidden" class="form-control" id="role" name="role" value="Customer">
+                            <div class="form-group col-lg-4">
+                                <button type="submit" class="btn btn-primary" name="submit" value="create"
+                                        onclick="return confirm('Are You Sure ' +
+                         'You Want To Register Now..!');">Register Now</button>
+                                <a class="btn btn-default" href="/login" role="button">Already have an account?</a>
+                                <a class="btn btn-warning" href="/" role="button">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
 
-                    <label for="exampleInputFirstName">First Name</label>
-                    <input type="text" class="form-control"  id="firstName" placeholder="First Name" name="firstName">
-                    <label for="exampleInputLastName">Last Name</label>
-                    <input type="text" class="form-control"  id="lastName" placeholder="Last Name" name="lastName">
-                    <label for="exampleInputEmailAddress1">Email Address</label>
-                    <input type="text" class="form-control"  id="email" placeholder="Email Address" name="email">
-                    <label for="exampleInputPassword">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-                    <label for="exampleInputPassword">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" name="confirmPassword">
-                    <label for="examplePhoneNumber">Mobile</label>
-                    <input type="number" class="form-control" id="mobile" placeholder="07x xxxx xxx" name="mobile">
-                    <input type="hidden" class="form-control" id="role" name="role" value="Customer">
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-success" name="submit" value="Confirm">Register Now</button>
-
-        </form>
-
-    </div>
+        </section>
     {{/if}}
 
 </div><!-- /.container -->

@@ -32,7 +32,7 @@ const dbName= 'jewellery';
 
 
 router.get('/', function(req, res, next) {
-    res.render('createPost', { errors : false , success : false});
+    res.render('createPost', { errors : false , success : false , layout : 'user'});
 });
 
 
@@ -40,7 +40,6 @@ router.post('/publish', uploadPost.single('productImage'), function(req, res, ne
 
     req.check('name', 'Product Name Filed Empty').notEmpty();
     req.check('quantity', 'Product Quantity Not Selected').notEmpty();
-    //req.check('productImage', 'Product Image Not Selected ').notEmpty();
     req.check('price', 'Product Price Not Decided').notEmpty();
 
         name = req.body.name;
@@ -53,7 +52,7 @@ router.post('/publish', uploadPost.single('productImage'), function(req, res, ne
 
     if(errors){
         req.session.errors = errors;
-        res.render('createPost' , { errors : req.session.errors , success: false});
+        res.render('createPost' , { errors : req.session.errors , success: false, layout: 'user'});
     } else {
         mongo.connect(url, function(err, client) {
             assert.equal(null, err);
@@ -95,7 +94,7 @@ router.get('/continue', function(req, res, next) {
             client.close();
         });
     });
-    res.render('createPost' , { errors : false , success : true});
+    res.render('createPost' , { errors : false , success : true, layout : 'user'});
 
 });
 

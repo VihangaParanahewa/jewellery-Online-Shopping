@@ -15,7 +15,7 @@ const dbName= 'jewellery';
 
 
 router.get('/', function(req, res, next) {
-    res.render('addNewUser', {errors: false, success: false});
+    res.render('addNewUser', {errors: false, success: false, layout : 'user'});
 });
 
 router.post('/addNewUser', function(req, res, next) {
@@ -44,7 +44,7 @@ router.post('/addNewUser', function(req, res, next) {
 
     if(errors) {
         req.session.errors = errors;
-        res.render('addNewUser', {errors: req.session.errors, success: false});
+        res.render('addNewUser', {errors: req.session.errors, success: false, layout : 'user'});
     } else {
         mongo.connect(url, function(err, client) {
             assert.equal(null, err);
@@ -55,7 +55,7 @@ router.post('/addNewUser', function(req, res, next) {
                 client.close();
             });
         });
-        res.render('addNewUser' , { errors : false , success : true});
+        res.render('addNewUser' , { errors : false , success : true, layout : 'user'});
     }
 });
 

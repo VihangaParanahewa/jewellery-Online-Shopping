@@ -6,14 +6,6 @@
             {{/each}}
         </ul>
     </div>
-    {{/if}}
-
-{{# if success}}
-    <div class="alert alert-success">
-        <ul>
-                <li><h2>Successfully Publish The New Post</h2></li>
-        </ul>
-    </div>
 {{/if}}
 
 
@@ -21,12 +13,14 @@
     <div class="container">
         <div class="row">
             <div class="container">
-                <h1>Create Product</h1>
+                <h1>Edit Product</h1>
                 <hr>
-                <form action="/post/publish" method="post" enctype="multipart/form-data">
+                <form action="/editProduct/updateProduct" method="post" enctype="multipart/form-data">
+                    {{# each result}}
+                        <input type="hidden" class="form-control" id="formGroupProductId"  name="productId" value="{{this.productId}}">
                     <div class="form-group col-lg-4">
                         <label for="formGroupProductName">Product Name</label>
-                        <input type="text" class="form-control" id="formGroupName" placeholder="Name" name="name">
+                        <input type="text" class="form-control" id="formGroupName" placeholder="Name" name="name" value="{{this.name}}">
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="formGroupCategory">Product Category</label>
@@ -38,27 +32,27 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="formGroupPost">Product Quantity</label>
-                        <input type="number" class="form-control" id="formGroupQuantity" placeholder="00" name="quantity">
+                        <input type="number" class="form-control" id="formGroupQuantity" placeholder="00" name="quantity" value="{{this.quantity}}">
                     </div>
                     <div class="form-group col-lg-4" >
                         <label for="exampleFormControlFile1">Product Image</label>
                         <input type="file" class="form-control-file" id="exampleFormProductImage" name="productImage">
+                        <p>(choose this field only for upload new photo)</p>
                     </div>
                     <div class="form-group col-lg-4">
                         <label for="formGroupMobile">Price</label>
                         <span class="input-group-addon">LKR</span>
-                        <input type="number" class="form-control" id="formGroupPrice" placeholder="0000.00" name="price">
+                        <input type="number" class="form-control" id="formGroupPrice" placeholder="0000.00" name="price" value="{{this.price}}">
                     </div>
                     <div class="form-group col-lg-4">
-                        <br>
                         <button type="submit" class="btn btn-primary" name="submit" value="create"
                                 onclick="return confirm('Are You Sure ' +
-                         'You Want To Add This Product..!');">Publish</button>
+                         'You Want To Update This Product..!');">Update</button>
                         <a class="btn btn-warning" href="/" role="button">Cancel</a>
                     </div>
+                        {{/each}}
                 </form>
             </div>
 
         </div>
     </div>
-</section>

@@ -1,5 +1,6 @@
 <div class="container marketing">
-
+    <p><h2 style="display: inline">Product: </h2><h3 style="display: inline">{{productType}}</h3></p>
+    <hr>
     <div class="row">
         {{#if isAuthenticated}}
             {{#if userRole}}
@@ -12,8 +13,8 @@
             <p><a class="btn btn-primary" href="/products/viewPhoto{{this.productImage}}" role="button">View Photo &raquo;</a></p>
 
 
-            <a class="btn btn-warning" href="#" role="button">Edit &raquo;</a>
-            <a class="btn btn-danger" href="/products/deleteProduct/{{this.productId}}" role="button"
+            <a class="btn btn-warning" href="/editProduct/edit/{{this.productId}}" role="button">Edit &raquo;</a>
+            <a class="btn btn-danger" href="/products/deleteProduct/{{this.productId}}/{{this.category}}" role="button"
                onclick="return confirm('Are You Sure ' +
                          'You Want To Delete This Product..!');">Delete &raquo;</a>
             <a class="btn btn-success" href="#" role="button">Add Cart &raquo;</a>

@@ -14,7 +14,14 @@ var url = 'mongodb://localhost:27017';
 const dbName= 'jewellery';
 
 
+
 router.get('/', function(req, res, next) {
+    res.send('respond with a resource');
+
+});
+
+
+router.get('/ring', function(req, res, next) {
         mongo.connect(url, function (err, client) {
             assert.equal(null, err);
             var dbo = client.db(dbName);
@@ -22,7 +29,7 @@ router.get('/', function(req, res, next) {
                 {category : "Ring"}
             ).toArray(function (err, result) {
                 assert.equal(null, err);
-                res.render('products', {result : result, layout: 'user'});
+                res.render('products', {result : result, productType : result[0].category, layout: 'user'});
                 client.close();
             });
         });
@@ -37,7 +44,7 @@ router.get('/necklace', function(req, res, next) {
             {category : "Necklace"}
         ).toArray(function (err, result) {
             assert.equal(null, err);
-            res.render('products', {result : result, layout: 'user'});
+            res.render('products', {result : result, productType : result[0].category, layout: 'user'});
             client.close();
         });
     });
@@ -51,7 +58,7 @@ router.get('/earring', function(req, res, next) {
             {category : "Earring"}
         ).toArray(function (err, result) {
             assert.equal(null, err);
-            res.render('products', {result : result, layout: 'user'});
+            res.render('products', {result : result, productType : result[0].category, layout: 'user'});
             client.close();
         });
     });
@@ -65,9 +72,11 @@ router.get('/viewPhoto/images/:id', function(req, res, next) {
     res.render('viewPhoto', {image: imagePath, layout: 'user'});
 });
 
-router.get('/deleteProduct/:id', function(req, res, next) {
+router.get('/deleteProduct/:id/:category', function(req, res, next) {
 
     var productId = parseInt(req.params.id);
+    var str = req.params.category;
+    productCategory = str.toLowerCase();
     console.log(productId);
     mongo.connect(url, function (err, client) {
         assert.equal(null, err);
@@ -76,7 +85,7 @@ router.get('/deleteProduct/:id', function(req, res, next) {
             assert.equal(null, err);
             console.log(rest.result.n+" document deleted");
             client.close();
-            res.redirect('/products');
+            res.redirect('/products/' + productCategory);
         });
 
     });

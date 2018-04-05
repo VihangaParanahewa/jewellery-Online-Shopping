@@ -29,7 +29,7 @@ router.get('/register', function(req, res, next) {
     if(req.isAuthenticated()){
      res.redirect('/');
     }else {
-        res.render('register', {success: req.session.success, errors: req.session.errors, existEmail: false});
+        res.render('register', {success: req.session.success, errors: req.session.errors, existEmail: false, layout : 'user'});
     }
 
 
@@ -131,7 +131,7 @@ router.post('/signIn', function(req, res, next) {
                 });
             }else{
                 console.log("User Invalid");
-                res.render('login' , {error: true});
+                res.render('login' , {error: true, layout : 'user'});
         }
         client.close();
         });
@@ -142,7 +142,7 @@ router.get('/login', function(req, res, next) {
     if(req.isAuthenticated()){
         res.redirect('/');
     }else {
-        res.render('login', {error: false});
+        res.render('login', {error: false, layout: 'user'});
     }
 
 });
