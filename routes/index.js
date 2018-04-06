@@ -102,12 +102,9 @@ router.get('/insertUser', function (req, res, next) {
             assert.equal(null, err);
             console.log("Inserted the customer Successfully");
             client.close();
+            res.redirect('/register');
         });
-
     });
-
-    res.redirect('/register');
-
 });
 
 router.post('/signIn', function(req, res, next) {

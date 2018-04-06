@@ -27,7 +27,7 @@ router.post('/addNewUser', function(req, res, next) {
     req.check('password','Password At least should be 4 characters').isLength({min: 4});
     req.check('mobile','Mobile Number Length Invalid').isLength({min: 10, max: 15});
 
-    var newUserDetail = {
+    newUserDetail = {
 
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -44,19 +44,45 @@ router.post('/addNewUser', function(req, res, next) {
 
     if(errors) {
         req.session.errors = errors;
-        res.render('addNewUser', {errors: req.session.errors, success: false, layout : 'user'});
+        req.session.success = false;
+        res.render('addNewUser', {success: req.session.success, errors: req.session.errors, existEmail: false, layout : 'user'});
     } else {
-        mongo.connect(url, function(err, client) {
+        req.session.errors = false;
+        req.session.success = false;
+        mongo.connect(url, function (err, client) {
             assert.equal(null, err);
-            var dbo = client.db(dbName);
-            dbo.collection('user').insertOne(newUserDetail , function (err, result) {
-                assert.equal(null, err);
-                console.log("Inserted the New System User Successfully");
-                client.close();
-            });
+            const db = client.db(dbName);
+            db.collection('user').find({email: req.body.email}, {email: 1})
+                .toArray(function (err, result) {
+                    assert.equal(null, err);
+                    if (result.length > 0) {
+                        console.log("verify Not unique New User's Email");
+                        res.render('addNewUser', {success: req.session.success, errors: req.session.errors, existEmail: true, layout : 'user'});
+                    } else {
+                        res.redirect('/operations/insertNewUser');
+                    }
+                    client.close();
+                });
         });
-        res.render('addNewUser' , { errors : false , success : true, layout : 'user'});
+
     }
+});
+
+router.get('/insertNewUser', function (req, res, next) {
+
+    req.session.success = true;
+
+    mongo.connect(url, function (err,client) {
+        assert.equal(null,err);
+        const db = client.db(dbName);
+        db.collection('user').insertOne(newUserDetail, function (err, result) {
+            assert.equal(null, err);
+            console.log("Inserted the New User Successfully");
+            client.close();
+            res.render('addNewUser' , { success: req.session.success, errors: req.session.errors, existEmail: false, layout : 'user'});
+        });
+
+    });
 });
 
 router.get('/viewSystemUsers', function(req, res, next) {
