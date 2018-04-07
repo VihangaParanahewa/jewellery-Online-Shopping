@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var twilio = require('twilio')('ACc8ab9018524c49a40a4d1d7683c3adab',
+    '32c40d3ed7476487d940ff834f030f0d');
 
 var expressValidator = require('express-validator');
 var passport= require('passport');
@@ -92,5 +94,20 @@ router.get('/deleteProduct/:id/:category', function(req, res, next) {
 });
 
 
+router.get('/sendSMS', function (req, res, next) {
+        twilio.messages.create({
+        to: '+94719364276',
+        from: '+12156189566',
+        body: 'Hello Vihanga, How Are You..?'
+    }, function(err, data){
+        if(err) {
+            console.log(err);
+        } else {
+            console.log(data);
+            res.redirect('/');
+        }
 
+    });
+
+});
 module.exports = router;

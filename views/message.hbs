@@ -1,0 +1,32 @@
+
+
+
+<section class="banner-sec">
+    <div class="container">
+        <div class="row">
+            <div class="container">
+                <h1>Message Box</h1>
+                <hr>
+                {{# if errors}}
+                    <div class="alert alert-danger">
+                        <ul>
+                            {{# each errors }}
+                                <li><h3>{{this.msg}}</h3></li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                {{else}}
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li><h3>The Email you entered Already Not A user in this System</h3></li>
+                        </ul>
+                    </div>
+                {{/if}}
+                <a href="/">
+                    Back to Home? Click here!
+                </a>
+            </div>
+            <br>
+        </div>
+    </div>
+</section>
