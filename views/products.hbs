@@ -5,7 +5,8 @@
         {{#if isAuthenticated}}
             {{#if userRole}}
     {{# each result }}
-        <div class="col-lg-4">
+        <div class="col-sm-6 col-lg-4">
+            <div class="thumbnail" style="">
             <img class="img-rounded" src="{{this.productImage}}" alt="Generic placeholder image" width="140" height="140">
             <h2>{{this.name}}</h2>
             <p><label for="formGroupPrice">Price(LKR): &nbsp</label>{{this.price}}</p>
@@ -17,39 +18,37 @@
             <a class="btn btn-danger" href="/products/deleteProduct/{{this.productId}}/{{this.category}}" role="button"
                onclick="return confirm('Are You Sure ' +
                          'You Want To Delete This Product..!');">Delete &raquo;</a>
-            <a class="btn btn-success" href="#" role="button">Add Cart &raquo;</a>
-
+            <a class="btn btn-success" href="/shopping-cart/add-to-cart/{{ this._id }}" role="button">Add Cart &raquo;<i class="fas fa-shopping-cart"></i> </a>
+            </div>
         </div>
     {{/each}}
             {{else}}
 
                 {{# each result }}
-                    <div class="col-lg-4">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="thumbnail">
                         <img class="img-rounded" src="{{this.productImage}}" alt="Generic placeholder image" width="140" height="140">
                         <h2>{{this.name}}</h2>
                         <p><label for="formGroupPrice">Price(LKR): &nbsp</label>{{this.price}}</p>
                         <p><label for="formGroupQuantity">Sales Left: &nbsp</label>{{this.quantity}}</p>
                         <p><a class="btn btn-primary" href="/products/viewPhoto{{this.productImage}}" role="button">View Photo &raquo;</a></p>
-
-
-                        <a class="btn btn-success" href="#" role="button">Add Cart &raquo;</a>
-
+                            <a class="btn btn-success" href="/shopping-cart/add-to-cart/{{ this._id }}" role="button">Add Cart &raquo;<i class="fas fa-shopping-cart"></i></a>
+                        </div>
                     </div>
                 {{/each}}
 
         {{/if}}
         {{else}}
             {{# each result }}
-                <div class="col-lg-4">
+                <div class="col-lg-6 col-lg-4">
+                    <div class="thumbnail">
                     <img class="img-rounded" src="{{this.productImage}}" alt="Generic placeholder image" width="140" height="140">
                     <h2>{{this.name}}</h2>
                     <p><label for="formGroupPrice">Price(LKR): &nbsp</label>{{this.price}}</p>
                     <p><label for="formGroupQuantity">Sales Left: &nbsp</label>{{this.quantity}}</p>
                     <p><a class="btn btn-primary" href="/products/viewPhoto{{this.productImage}}" role="button">View Photo &raquo;</a></p>
-
-
-                    <a class="btn btn-success" href="/register" role="button">Pay Online &raquo;</a>
-
+                        <a class="btn btn-success" href="/register" role="button">Pay Online &raquo;</a>
+                    </div>
                 </div>
             {{/each}}
         {{/if}}

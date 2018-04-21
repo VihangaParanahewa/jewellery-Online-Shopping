@@ -19,6 +19,7 @@ var operations = require('./routes/operations');
 var products = require('./routes/products');
 var editProduct = require('./routes/editProduct');
 var forgotPassword = require('./routes/forgotPassword');
+var shoppingCart = require('./routes/shopping-cart');
 
 var app = express();
 
@@ -63,6 +64,7 @@ app.use(passport.session());
 
 app.use(function (req,res,next) {
     res.locals.isAuthenticated = req.isAuthenticated();
+    res.locals.session = req.session;
     if (req.isAuthenticated()){
         res.locals.user = req.user;
         if(req.user.role == 'Admin')
@@ -78,6 +80,8 @@ app.use('/operations', operations);
 app.use('/products', products);
 app.use('/editProduct', editProduct);
 app.use('/forgotPassword', forgotPassword);
+app.use('/shopping-cart', shoppingCart);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

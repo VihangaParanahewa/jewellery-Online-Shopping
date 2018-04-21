@@ -1,0 +1,72 @@
+<script> var count = 1;</script>
+{{# if this.products }}
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-md-offset-3 col-sm-offset-3">
+            <div class="list-group">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Product Image</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Price Per Unit</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Action</th>
+                            <th scope="col">Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each products}}
+                            <tr>
+                                <th scope="row"><script>document.write(count)</script></th>
+                                <td>
+                                    <img class="img-rounded" src="{{this.item.productImage}}" alt="Generic placeholder image" width="100" height="100">
+                                </td>
+                                <td>{{this.item.name}}</td>
+                                <td>{{this.item.price}}</td>
+                                <td><span class="label label-warning">{{this.item.price}} x {{this.qty}}</span> =
+                                    <span class="label label-success">LKR {{this.price}}</span></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                            Action <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="/shopping-cart/reduce/{{this.item._id}}">Reduce by 1</a></li>
+                                            <li><a href="/shopping-cart/remove/{{this.item._id}}">Remove All</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td><span class="badge">{{this.qty}}</span></td>
+                            </tr>
+                            <script>count ++;</script>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+        <hr>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+            <strong>Total (LKR): {{totalPrice}}</strong>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+            <button type="button" class="btn btn-success">Checkout</button>
+        </div>
+    </div>
+    {{ else }}
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+            <h2>No Items in Cart yet!</h2>
+        </div>
+    </div>
+{{/if}}
+<hr>
+
