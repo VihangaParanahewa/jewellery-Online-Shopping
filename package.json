@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "body-parser": "~1.18.2",
+    "connect-flash": "^0.1.1",
     "connect-mongo": "^1.1.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -23,6 +24,7 @@
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.4.5",
     "sha1": "^1.1.1",
+    "stripe": "^5.8.0",
     "twilio": "^3.14.0"
   }
 }

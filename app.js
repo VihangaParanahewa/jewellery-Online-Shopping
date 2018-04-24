@@ -8,6 +8,7 @@ var hbs  = require('express-handlebars');
 var expressValidator = require('express-validator');
 var expressSession= require('express-session');
 var passport= require('passport');
+var flash = require('connect-flash');
 var LocalStrategy = require('passport-local').Strategy;
 var MongoStore = require('connect-mongo')(expressSession);
 var mongoose = require('mongoose');
@@ -59,6 +60,7 @@ app.use(expressSession({
 }));
 
 //app.use(expressSession({secret:'max' ,saveUninitialized: false ,resave: false}));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
