@@ -7,7 +7,7 @@ var Order = require('../models/order');
 
 router.get('/', function(req, res, next) {
     if (!req.session.cart) {
-        return res.render('shopping-cart', {products: null});
+        return res.render('shopping-cart', {products: null, errMsg: false, noError: true});
     }
     var cart = new Cart(req.session.cart);
     res.render('shopping-cart', {products: cart.generateArray(), totalPrice: cart.totalPrice, layout: 'user'});
@@ -81,7 +81,7 @@ router.post('/checkout', function(req, res, next) {
         order.save(function(err, result) {
             req.flash('success', 'Successfully bought product!');
             req.session.cart = null;
-            res.redirect('/shopping-cart');
+            res.render('shopping-cart', {products: req.session.cart, errMsg: req.flash('success')[0], noError: false});
         });
     });
 });
