@@ -1,2 +1,2 @@
 # jewellery-OnlineShopping.....
-Node.js + Express.js + Passport.js+ MongoDB
+Node.js + Express application generator, MongoDB, Twillio message API, Stripe online payment API
