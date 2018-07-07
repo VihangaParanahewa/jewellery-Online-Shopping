@@ -20,12 +20,13 @@ Admin Functions -
 
 Common Features(Admin and Customer) -
     1). Login / Register
-    2). View Profile
-    3). Update Profile
-    4). Rest Password
-    5). Forgot Password
-    6). Add to Cart (Shopping Cart)
-    7). Checkout
+    2). View Products
+    3). View Profile
+    4). Update Profile
+    5). Rest Password
+    6). Forgot Password
+    7). Add to Cart (Shopping Cart)
+    8). Checkout
 
 Technologies Used -
     1). Full stack web development - Node.js with Express Application Generator
