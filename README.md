@@ -16,7 +16,7 @@ Modules - Admin , Customer
                   1). View System Users
                   2). Add Products
                   3). Update/Delete Product/Product Details
-                  4). Add New Sytem User
+                  4). Add New System User
 
               Common Features(Admin and Customer) -
                   1). Login / Register
