@@ -36,9 +36,3 @@ Modules - Admin , Customer
                   5). Online Payment API - Stripe
 
 
-              Technologies Used -
-                  1). Full stack web development - Node.js with Express Application Generator
-                  2). Database - MongoDB
-                  3). Authentication - Passport.js
-                  4). Online Chat - Socket.io
-
