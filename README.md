@@ -1,5 +1,6 @@
 # jewellery-OnlineShopping.....
 
+
 This is Web based system for online jewelry shopping. In this website jewelry shopping can
 do in under three categories.
    1). Ring
@@ -32,3 +33,4 @@ Technologies Used -
     3). Authentication - Passport.js
     4). Message API - Twilio
     5). Online Payment API - Stripe
+
